@@ -1,0 +1,15 @@
+{
+  "base_url": "https://www.vereinsflieger.de/",
+  "username": "vereinsflieger@emailadress.com",
+  "password": "PW",
+  "appkey": "APPKEY",
+  "db_config": {
+    "user": "user",
+    "password": "password",
+    "host": "127.0.0.1",
+    "database": "vf-toolbox"
+  },
+  "export_users": true,
+  "export_flights": false,
+  "export_reservations": false
+}
