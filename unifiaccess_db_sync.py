@@ -2,24 +2,24 @@ import mysql.connector
 import requests
 import time
 import urllib3
+import json
 
 # Warnung unterdrücken (nur für Testzwecke!)
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
+# Lade Konfiguration
+with open('config.json', 'r', encoding='utf-8') as f:
+    config = json.load(f)
+
 # --- KONFIGURATION ---
-DB_HOST = "localhost"
-DB_USER = "root"
-DB_PASS = "38YR44n8"
-DB_NAME = "vf-toolbox"
-API_HOST = "https://10.0.0.1:12445"
-API_TOKEN = "W104t1Udw42LeWID9op0K_zTlUwiwfAn"
+DB_CONFIG = config['db_config']
+UNIFI_IP = config['UNIFI_IP']
+UNIFI_API_TOKEN = config['UNIFI_API_TOKEN']
 VISIT_REASON = "VF-Tool"  # Wird jetzt korrekt verwendet
 
 # --- SKRIPT ---
 # Verbindung zur MariaDB
-db = mysql.connector.connect(
-    host=DB_HOST, user=DB_USER, password=DB_PASS, database=DB_NAME
-)
+db = mysql.connector.connect(user=DB_CONFIG['user'], password=DB_CONFIG['password'], host=DB_CONFIG['host'],database=DB_CONFIG['database'])
 cursor = db.cursor()
 
 # Daten auslesen
@@ -28,14 +28,14 @@ besucher = cursor.fetchall()
 
 # UniFi Access API Konfiguration
 headers = {
-    "Authorization": f"Bearer {API_TOKEN}",
+    "Authorization": f"Bearer {UNIFI_API_TOKEN}",
     "accept": "application/json",
     "content-type": "application/json"
 }
 
 # Alle Door Groups abrufen
 response = requests.get(
-    f"{API_HOST}/api/v1/developer/door_groups",
+    f"{UNIFI_IP}/api/v1/developer/door_groups/",
     headers=headers,
     verify=False
 )
@@ -48,7 +48,7 @@ end_time = start_time + 7 * 24 * 60 * 60
 
 # --- Vorher alle Visitors mit Besuchsgrund "VF-Tool" löschen ---
 response = requests.get(
-    f"{API_HOST}/api/v1/developer/visitors",
+    f"{UNIFI_IP}/api/v1/developer/visitors",
     headers=headers,
     verify=False
 )
@@ -60,7 +60,7 @@ for visitor in visitors:
         visitor_id = visitor["id"]
         # Füge is_force=true hinzu für physisches Löschen
         response = requests.delete(
-            f"{API_HOST}/api/v1/developer/visitors/{visitor_id}?is_force=true",
+            f"{UNIFI_IP}/api/v1/developer/visitors/{visitor_id}?is_force=true",
             headers=headers,
             verify=False
         )
@@ -79,10 +79,10 @@ for firstname, lastname, carlicenseplate in besucher:
         "end_time": end_time,
         "visit_reason": VISIT_REASON,
         "resources": resources,
-        "license_plates": [carlicenseplate]  # Experimentell, laut Forenpost
+        "license_plates": [carlicenseplate]
     }
     response = requests.post(
-        f"{API_HOST}/api/v1/developer/visitors",
+        f"{UNIFI_IP}/api/v1/developer/visitors",
         headers=headers,
         json=data,
         verify=False
