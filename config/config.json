@@ -1,0 +1,17 @@
+{
+  "base_url": "https://www.vereinsflieger.de/",
+  "username": "lucas.frenzel@gmail.com",
+  "password": "13f555699a82bc793935075469fd6a97",
+  "appkey": "a0d18afff86bbf0af7cb05ba95891fb4",
+  "db_config": {
+    "user": "root",
+    "password": "38YR44n8",
+    "host": "127.0.0.1",
+    "database": "vf-toolbox"
+  },
+  "UNIFI_IP": "https://10.0.0.1:12445",
+  "UNIFI_API_TOKEN": "GHsfvjchFdJ7xGOVQbgj+w",
+  "export_users": true,
+  "export_flights": false,
+  "export_reservations": false
+}

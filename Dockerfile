@@ -1,17 +1,18 @@
 FROM alpine:latest
 
-# Installiere Python und pip
 RUN apk add --no-cache python3 py3-pip git && \
     ln -sf python3 /usr/bin/python
 
-# Arbeitsverzeichnis erstellen
 WORKDIR /app
 
-# Klone das GitHub-Repository (ersetze URL ggf. durch dein Repo)
-RUN git clone https://github.com/Sanke1/vf-tool . 
+# Klone Repo
+RUN git clone https://github.com/Sanke1/vf-tool .
 
-# Installiere Python-Abhängigkeiten, falls requirements.txt vorhanden
-# RUN pip install -r requirements.txt
+# Erstelle virtuelles Environment + installiere Pakete
+RUN python3 -m venv /app/venv && \
+    /app/venv/bin/pip install --upgrade pip && \
+    /app/venv/bin/pip install mysql-connector-python requests urllib3
 
-# Standardmäßig wird das Python-Skript gestartet (ersetze main.py durch deinen Einstiegspunkt)
-CMD ["python", "main.py"]
+# Verzeichnis als Volume kennzeichnen
+CMD ["/app/venv/bin/python", "main.py"]
+CMD ["tail", "-f", "/dev/null"]
