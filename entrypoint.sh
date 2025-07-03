@@ -1,8 +1,18 @@
 #!/bin/sh
+set -e
 
-# Prüfen, ob config.json im gemounteten /app/config fehlt
-if [ ! -f /app/config/config.json ]; then
-    cp /app/example.config.json /app/config/config.json
+# ─────────────────────── Config prüfen ────────────────────────────
+# Wenn KEINE /config/config.json vorhanden ist → Vorlage kopieren
+if [ ! -f /config/config.json ]; then
+  echo "[INFO] /config/config.json nicht gefunden – erstelle aus config.example.json"
+  cp /config/config.example.json /config/config.json
 fi
+
+# (Optional) Symlink jeweils aktualisieren
+ln -sf /config/config.json /app/config.json
+
+# ─────────────────────── Anwendung starten ────────────────────────
+exec /app/venv/bin/python3 your_script.py  "$@"
+
 
 exec /app/venv/bin/python main.py

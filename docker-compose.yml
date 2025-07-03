@@ -3,4 +3,4 @@ services:
     image: sanke123/vf-tool
     container_name: vf-tool
     volumes:
-      - ./config:/app/config
+      - ./config.json:/config/config.json
