@@ -15,4 +15,3 @@ RUN python3 -m venv /app/venv && \
 
 # Verzeichnis als Volume kennzeichnen
 CMD ["/app/venv/bin/python", "main.py"]
-CMD ["tail", "-f", "/dev/null"]
