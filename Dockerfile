@@ -8,7 +8,7 @@ RUN apk add --no-cache python3 py3-pip git && \
 WORKDIR /app
 
 # Klone das GitHub-Repository (ersetze URL ggf. durch dein Repo)
-RUN git clone https://$GIT_TOKEN@github.com/Sanke1/vf-tool . 
+RUN git clone github.com/Sanke1/vf-tool . 
 
 # Installiere Python-Abhängigkeiten, falls requirements.txt vorhanden
 # RUN pip install -r requirements.txt
