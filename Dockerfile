@@ -13,5 +13,9 @@ RUN python3 -m venv /app/venv && \
     /app/venv/bin/pip install --upgrade pip && \
     /app/venv/bin/pip install mysql-connector-python requests urllib3
 
-# Verzeichnis als Volume kennzeichnen
-CMD ["/app/venv/bin/python", "main.py"]
+# entrypoint.sh ins Image kopieren
+COPY entrypoint.sh /app/entrypoint.sh
+RUN chmod +x /app/entrypoint.sh
+
+# Start über entrypoint.sh
+ENTRYPOINT ["/app/entrypoint.sh"]

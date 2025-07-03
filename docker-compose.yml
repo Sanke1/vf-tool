@@ -1,0 +1,6 @@
+services:
+  vftool:
+    image: sanke123/vftool
+    container_name: vftool
+    volumes:
+      - ./config:/app/config
