@@ -5,7 +5,7 @@ from mysql.connector import errorcode
 from datetime import datetime
 
 # Lade Konfiguration
-with open('config/config.json', 'r', encoding='utf-8') as f:
+with open('config.json', 'r', encoding='utf-8') as f:
     config = json.load(f)
 
 BASE_URL = config['base_url']

@@ -4,7 +4,7 @@ set -e
 tail -f /dev/null
 
 # config.json aus Template erzeugen
-envsubst < config/config.json.template > config/config.json
+envsubst < config.json.template > config.json
 
 # Warten bis Datenbank erreichbar ist (optional, für Robustheit)
 until nc -z $DB_HOST $DB_PORT; do

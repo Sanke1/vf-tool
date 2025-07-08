@@ -9,7 +9,7 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 # Lade Konfiguration
 try:
-    with open('config/config.json', 'r', encoding='utf-8') as f:
+    with open('config.json', 'r', encoding='utf-8') as f:
         config = json.load(f)
 except FileNotFoundError:
     print("Fehler: config.json nicht gefunden!")
