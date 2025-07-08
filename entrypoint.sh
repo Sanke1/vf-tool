@@ -1,6 +1,8 @@
 #!/bin/sh
 set -e
 
+sleep infinity
+
 # config.json aus Template erzeugen
 envsubst < config/config.json.template > config/config.json
 
