@@ -1,0 +1,17 @@
+{
+  "base_url": "${BASE_URL}",
+  "username": "${VF_USERNAME}",
+  "password": "${VF_PASSWORD}",
+  "appkey": "${VF_APPKEY}",
+  "db_config": {
+    "user": "${DB_USER}",
+    "password": "${DB_PASSWORD}",
+    "host": "${DB_HOST}",
+    "database": "${DB_NAME}"
+  },
+  "UNIFI_IP": "${UNIFI_IP}",
+  "UNIFI_API_TOKEN": "${UNIFI_API_TOKEN}",
+  "export_users": ${EXPORT_USERS},
+  "export_flights": ${EXPORT_FLIGHTS},
+  "export_reservations": ${EXPORT_RESERVATIONS}
+}
